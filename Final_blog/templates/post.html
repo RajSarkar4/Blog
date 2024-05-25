@@ -27,7 +27,6 @@
       <div class="col-md-10 col-lg-8 col-xl-7">
         {{ post.body|safe }}
         {% if current_user.id == 1 %}
-        <!--TODO: Only show Edit Post button if user id is 1 (admin user) -->
         <div class="d-flex justify-content-end mb-4">
           <a
             class="btn btn-primary float-right"
@@ -38,12 +37,10 @@
         {% endif %}
 
         <!-- Comments Area -->
-        <!-- TODO: Add a CKEditor for commenting below -->
         <div class="comment">
           {{ render_form(form, novalidate=True, button_map={'submit':'primary'}) }}
           {{ ckeditor.load() }}
           {{ ckeditor.config(name='comment_text') }}
-          <!-- TODO: Show all the comments on a post -->
           <ul class="commentList">
             {% for comment in all_comments %}
             <li>
