@@ -9,11 +9,12 @@ from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Text, ForeignKey
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 # Import your forms from the forms.py
 from forms import CreatePostForm, RegistrationForm, LoginForm, CommentForm
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get('FLASH_KEY')
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 gravatar = Gravatar(app,
@@ -29,6 +30,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+@login_manager.user_loader
 def load_user(user_id):
     return db.get_or_404(User, user_id)
 
@@ -53,7 +55,7 @@ class Base(DeclarativeBase):
     pass
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URL')
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
@@ -182,7 +184,6 @@ def show_post(post_id):
     )
 
 
-
 @app.route("/new-post", methods=["GET", "POST"])
 @admin_only
 def add_new_post():
@@ -244,4 +245,4 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5002)
+    app.run(debug=False, port=5002)
