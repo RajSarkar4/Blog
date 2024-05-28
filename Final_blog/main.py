@@ -10,13 +10,18 @@ from sqlalchemy import Integer, String, Text, ForeignKey
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+from flask_wtf import CSRFProtect
 # Import your forms from the forms.py
 from forms import CreatePostForm, RegistrationForm, LoginForm, CommentForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASH_KEY')
+app.config['WTF_CSRF_SECRET_KEY'] = os.environ.get("CSRF_KEY")
+csrf = CSRFProtect(app)
+csrf.init_app(app)
 ckeditor = CKEditor(app)
 Bootstrap5(app)
+
 gravatar = Gravatar(app,
                     size=100,
                     rating='g',
