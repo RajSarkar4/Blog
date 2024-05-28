@@ -60,7 +60,7 @@ class Base(DeclarativeBase):
     pass
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://blogdata_x8r7_user:eRqoNpJIAQAMzlgPSsh6HAevr5wUE3Q1@dpg-cpaa0363e1ms739mncm0-a.singapore-postgres.render.com/blogdata_x8r7"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://blogdata_x8r7_user:eRqoNpJIAQAMzlgPSsh6HAevr5wUE3Q1@dpg-cpaa0363e1ms739mncm0-a.singapore-postgres.render.com/blogdata_x8r7"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
