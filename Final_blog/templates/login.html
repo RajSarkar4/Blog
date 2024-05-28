@@ -1,5 +1,4 @@
-{% from "bootstrap5/form.html" import render_form %}
-{% block content %} {%
+{% from "bootstrap5/form.html" import render_form %} {% block content %} {%
 include "header.html" %}
 
 <!-- Page Header -->
@@ -30,10 +29,7 @@ include "header.html" %}
       {% endif %}
     {% endwith %}
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form method="post">
-           {{ form.csrf_token }}
-           {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
-        </form>
+        {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
       </div>
     </div>
   </div>

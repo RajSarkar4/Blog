@@ -22,11 +22,7 @@ include "header.html" %}
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form method="post">
-           {{ form.csrf_token }}
-           {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
-        </form>
-
+        {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
       </div>
     </div>
   </div>

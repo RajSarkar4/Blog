@@ -10,7 +10,6 @@ from sqlalchemy import Integer, String, Text, ForeignKey
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
-from flask_wtf.csrf import CSRFProtect
 # Import your forms from the forms.py
 from forms import CreatePostForm, RegistrationForm, LoginForm, CommentForm
 
@@ -18,7 +17,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASH_KEY')
 ckeditor = CKEditor(app)
 Bootstrap5(app)
-csrf = CSRFProtect(app)
 gravatar = Gravatar(app,
                     size=100,
                     rating='g',
@@ -106,6 +104,7 @@ with app.app_context():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+
     if form.validate_on_submit():
         result = db.session.execute(db.select(User).where(User.email == request.form.get('email'))).scalar()
         if result:
