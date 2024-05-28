@@ -15,8 +15,8 @@ from flask_wtf import CSRFProtect
 from forms import CreatePostForm, RegistrationForm, LoginForm, CommentForm
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('FLASH_KEY')
-app.config['WTF_CSRF_SECRET_KEY'] = os.environ.get("CSRF_KEY")
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['WTF_CSRF_SECRET_KEY'] = 'dhddfgvdjgvdfgvrgv'
 csrf = CSRFProtect(app)
 csrf.init_app(app)
 ckeditor = CKEditor(app)
@@ -60,7 +60,7 @@ class Base(DeclarativeBase):
     pass
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://blogdata_x8r7_user:eRqoNpJIAQAMzlgPSsh6HAevr5wUE3Q1@dpg-cpaa0363e1ms739mncm0-a.singapore-postgres.render.com/blogdata_x8r7"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
